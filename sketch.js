@@ -1,0 +1,71 @@
+var balloon,balloonImage1,balloonImage2;
+var database;
+var height;
+
+function preload(){
+   bg =loadImage("Images/cityImage.png");
+   balloonImage1=loadAnimation("Images/HotAirBallon-01.png");
+   balloonImage2=loadAnimation("Images/HotAirBallon-01.png","Images/HotAirBallon-01.png",
+   "Images/HotAirBallon-01.png","Images/HotAirBallon-02.png","Images/HotAirBallon-02.png",
+   "Images/HotAirBallon-02.png","Images/HotAirBallon-03.png","Images/HotAirBallon-03.png","Images/HotAirBallon-03.png");
+  }
+
+//Function to set initial environment
+function setup() {
+  
+  //namespace firebase
+
+
+  createCanvas(1500,700);
+
+  //create balloon sprite
+
+
+  textSize(20); 
+}
+
+// function to display UI
+function draw() {
+  background(bg);
+
+  if(keyDown(LEFT_ARROW)){
+    
+    balloon.addAnimation("hotAirBalloon",balloonImage2);
+  }
+  else if(keyDown(RIGHT_ARROW)){
+    
+    balloon.addAnimation("hotAirBalloon",balloonImage2);
+  }
+  else if(keyDown(UP_ARROW)){
+    
+    balloon.addAnimation("hotAirBalloon",balloonImage2);
+    balloon.scale=balloon.scale -0.005;
+  }
+  else if(keyDown(DOWN_ARROW)){
+    
+    balloon.addAnimation("hotAirBalloon",balloonImage2);
+    balloon.scale=balloon.scale+0.005;
+  }
+
+  drawSprites();
+  fill(0);
+  stroke("white");
+  textSize(25);
+  text("**Use arrow keys to move Hot Air Balloon!",40,40);
+}
+
+
+function updateHeight(x,y){
+  
+}
+
+function readHeight(data){
+  height = data.val();
+  console.log(height.x);
+  balloon.x = height.x;
+  balloon.y = height.y;
+}
+
+function showError(){
+  console.log("Error in writing to the database");
+}
